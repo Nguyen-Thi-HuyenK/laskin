@@ -1,1 +1,1 @@
-# Laskin
+# Laskin Reactilla ja TypeScriptillä
