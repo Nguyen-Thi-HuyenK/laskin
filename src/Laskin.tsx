@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import * as math from 'mathjs';
 import './App.css';
+import { useDarkMode } from './DarkModeContext';
 
 const Laskin: React.FC = () => {
+  const {darkMode, toggleDarkMode} = useDarkMode();
   const [input, setInput] = useState<string>('');
   const [operand, setOperand] = useState<string>('');
   const [result, setResult] = useState<string>('');
@@ -30,14 +32,15 @@ const Laskin: React.FC = () => {
   };
 
   return (
+    <div className={darkMode ? 'dark-mode' : 'light-mode'}>
       <div className='laskin'>
         <h1>Laskin</h1>
         <div className='display'>
-        {input && <span>{input}</span>}
-        {result && <span>{'='}</span>}
-        {result && <span>{result}</span>}
-      </div>
-          <div className='buttons'>
+          {input && <span>{input}</span>}
+          {result && <span>{'='}</span>}
+          {result && <span>{result}</span>}
+        </div>
+        <div className='buttons'>
           <button onClick={() => handleButtonClick('1')}>1</button>
           <button onClick={() => handleButtonClick('2')}>2</button>
           <button onClick={() => handleButtonClick('3')}>3</button>
@@ -56,7 +59,9 @@ const Laskin: React.FC = () => {
           <button className='operand' onClick={() => handleButtonClick('/')}>/</button>
           <button className='equals' onClick={handleCalculate}>=</button>
         </div>
-      </div>
+        <button className='toggleMode' onClick={toggleDarkMode}>Toggle dark mode</button>
+      </div> 
+    </div>
     );
   }
 
